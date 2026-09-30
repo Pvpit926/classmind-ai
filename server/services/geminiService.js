@@ -65,7 +65,11 @@ export const generateQuestions = async (config) => {
   `;
 
   const result = await model.generateContent(prompt);
-  const responseText = result.response.text();
+  let responseText = result.response.text();
+  
+  // Clean up any potential markdown formatting from Gemini
+  responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
+  
   const data = JSON.parse(responseText);
 
   return data;
@@ -127,7 +131,11 @@ export const generateRecommendations = async (results) => {
   `;
 
   const result = await model.generateContent(prompt);
-  const responseText = result.response.text();
+  let responseText = result.response.text();
+  
+  // Clean up any potential markdown formatting from Gemini
+  responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
+  
   const data = JSON.parse(responseText);
 
   return data;
