@@ -97,7 +97,7 @@ export const submitAssessment = async (req, res) => {
   try {
     if (!db) return res.json({ success: true, data: {} });
 
-    const { assessmentId } = req.params;
+    const assessmentId = req.params.id; // Fix: the route param is 'id', not 'assessmentId'
     const { answers, questions } = req.body; // sending questions from frontend for easy scoring in MVP
 
     // Scoring Engine
